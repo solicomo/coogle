@@ -5,31 +5,31 @@ $google = "http://www.google.co.jp/";
 $url = $google . "search?" . $_SERVER["QUERY_STRING"];
 $html = file_get_html($url);
 
-foreach($html->find('a') as $a)
+foreach($html->find('a') as $e)
 {
-	if (0 <> strcasecmp(substr($a->href, 0, 7), 'http://'))
-		$a->href = $google . $a->href;
-	$a->onmousedown = '';
+	if (!empty($e->href) && 0 <> strcasecmp(substr($e->href, 0, 7), 'http://'))
+		$e->href = $google . $e->href;
+	$e->onmousedown = '';
 }
 
-foreach($html->find('img') as $img)
+foreach($html->find('img') as $e)
 {
-	if(0 <> strcasecmp(substr($img->src, 0, 7), 'http://'))
-		$img->src = $google . $img->src;
+	if(!empty($e->src) && 0 <> strcasecmp(substr($e->src, 0, 7), 'http://'))
+		$e->src = $google . $e->src;
 }
 
-foreach($html->find('script') as $script)
+foreach($html->find('script') as $e)
 {
-	if(0 <> strcasecmp(substr($script->src, 0, 7), 'http://'))
-		$script->src = $google . $script->src;
+	if(!empty($e->src) && 0 <> strcasecmp(substr($e->src, 0, 7), 'http://'))
+		$e->src = $google . $e->src;
 }
 
-foreach($html->find('form') as $form)
+foreach($html->find('form') as $e)
 {
-	if($form->action == '/search') {
-		$form->action = basename(__FILE__);
-	} else if(0 <> strcasecmp(substr($form->action, 0, 7), 'http://')) {
-		$form->action = $google . $form->action;
+	if($e->action == '/search') {
+		$e->action = basename(__FILE__);
+	} else if(!empty($e->action) && 0 <> strcasecmp(substr($e->action, 0, 7), 'http://')) {
+		$e->action = $google . $e->action;
 	}
 }
 
