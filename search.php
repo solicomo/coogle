@@ -1,4 +1,10 @@
 <?php
+if(empty($_SERVER["QUERY_STRING"]))
+{
+	header("Location:http://" . $_SERVER['SERVER_NAME'] . dirname($_SERVER['SCRIPT_NAME']));
+	exit;
+}
+
 require_once('simple_html_dom.php');
 
 $google = "http://www.google.co.jp/";
