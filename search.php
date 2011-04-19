@@ -33,9 +33,19 @@ $html = file_get_html($url, false, $context);
 
 foreach($html->find('a') as $e)
 {
-	if (!empty($e->href) && 0 <> strcasecmp(substr($e->href, 0, 7), 'http://'))
-		$e->href = $google . $e->href;
 	$e->onmousedown = '';
+
+	if(empty($e->href))
+		continue;
+
+	//还原搜索结果的链接为真正的目的网址
+	if(0 == strcasecmp(substr($e->href, 0, 7), '/url?q=')) {
+		//IE
+		$e->href = substr($e->href, 7, strpos($e->href, '&amp;')-7);
+	} else if(0 <> strcasecmp(substr($e->href, 0, 7), 'http://')) {
+		//!IE
+		$e->href = $google . $e->href;
+	}
 }
 
 foreach($html->find('img') as $e)
