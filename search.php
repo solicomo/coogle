@@ -1,7 +1,7 @@
 <?php
 require_once('simple_html_dom.php');
 
-$google = "http://www.google.com/";
+$google = "http://www.google.co.jp/";
 $url = $google . "search?" . $_SERVER["QUERY_STRING"];
 $html = file_get_html($url);
 
