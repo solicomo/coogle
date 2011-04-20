@@ -9,8 +9,20 @@ require_once('route.php');
 require_once('simple_html_dom.php');
 require_once('httpheaders.php');
 
-$html = file_get_html($url, false, $context);
+$html = @file_get_html($url, false, $context);
 
+//404
+if(!empty($content)) {
+	echo $content;
+} else if (file_exists(PAGE404)) {
+	@readfile($file);
+} else {
+	header("HTTP/1.1 404 Not Found");
+	header("Status: 404 Not Found");
+	exit;	
+}
+
+//...
 foreach($html->find('a') as $e)
 {
 	$e->onmousedown = '';
