@@ -1,5 +1,6 @@
 RewriteEngine On
 
-RewriteCond %{QUERY_STRING}     ^(.*)$
-RewriteCond %{SCRIPT_FILENAME}  ^(.*)/search$       [NC]
-RewriteRule ^(.*)$              %2/search.php?%1    [L]
+RewriteCond %{SCRIPT_FILENAME}	^(.*)/search$	[NC]
+RewriteRule ^(.*)$				search.php		[L]
+
+RewriteRule ^(.*)$				proxy.php		[L]
