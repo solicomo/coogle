@@ -15,6 +15,7 @@ foreach($html->find('a') as $e)
 {
 	//!IE
 	$e->onmousedown = '';
+	$e->target = '_blank';
 
 	//IE
 	if(!empty($e->href) && 0 === strcasecmp(substr($e->href, 0, 7), '/url?q=')) {
