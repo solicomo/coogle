@@ -1,5 +1,5 @@
 <?php
-define('SITE', 'http://www.google.co.jp/');
+define('SITE', 'http://www.google.com/');
 define('PAGE404', '404.shtml');
 
 function deal_404() {

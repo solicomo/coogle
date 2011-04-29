@@ -11,15 +11,17 @@ if(empty($html)) {
 }
 
 //还原搜索结果的链接为真正的目的网址
-foreach($html->find('a') as $e)
-{
-	//!IE
-	$e->onmousedown = '';
-	$e->target = '_blank';
+foreach($html->find('a') as $e) {
+	if($e->class === "l") {
+		$e->target = '_blank';
+		
+		//!IE
+		$e->onmousedown = '';
 
-	//IE
-	if(!empty($e->href) && 0 === strcasecmp(substr($e->href, 0, 7), '/url?q=')) {
-		$e->href = substr($e->href, 7, strpos($e->href, '&amp;')-7);
+		//IE
+		if(!empty($e->href) && 0 === strcasecmp(substr($e->href, 0, 7), '/url?q=')) {
+			$e->href = substr($e->href, 7, strpos($e->href, '&amp;')-7);
+		}
 	}
 }
 
